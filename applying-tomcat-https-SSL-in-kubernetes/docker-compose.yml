@@ -1,0 +1,15 @@
+version: "3"
+services:
+  springboot-order-crud-service:
+    image: docker.io/devbhuwan/springboot-order-crud-service
+    build:
+      context: docker
+      dockerfile: Dockerfile
+      args:
+      - WAR_FILE=springboot-order-crud-service.war
+    ports:
+    - 8443:8443
+    volumes:
+    - ./docker/conf/ssl.crt:/usr/local/tomcat/conf/ssl.crt
+    - ./docker/conf/ssl.key:/usr/local/tomcat/conf/ssl.key
+    - ./docker/conf/server.xml:/usr/local/tomcat/conf/server.xml

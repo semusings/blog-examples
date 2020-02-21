@@ -1,0 +1,26 @@
+{
+  "name": "aws-lambda-with-dynamodb-streams",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-offline": "^3.25.10",
+    "serverless-pseudo-parameters": "^2.2.0",
+    "serverless-sam": "^0.1.0",
+    "serverless-step-functions": "^1.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhuwanUpadhyay/aws-lambda-with-dynamodb-streams.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BhuwanUpadhyay/aws-lambda-with-dynamodb-streams/issues"
+  },
+  "homepage": "https://github.com/BhuwanUpadhyay/aws-lambda-with-dynamodb-streams#readme"
+}

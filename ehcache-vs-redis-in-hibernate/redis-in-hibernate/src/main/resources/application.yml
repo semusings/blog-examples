@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: postgres, redis
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+---
+spring:
+  profiles: oracledb
+  datasource:
+    url: jdbc:oracle:thin:@oracledb:1521:ORCLCDB
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: otest
+    password: otest
+---
+spring:
+  profiles: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ptest
+    driver-class-name: org.postgresql.Driver
+    username: ptest
+    password: ptest
+---
+spring:
+  profiles: h2
+  datasource:
+    driver-class-name: org.h2.Driver
+---
+spring:
+  profiles: redis
+  jpa:
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.redis.hibernate52.SingletonRedisRegionFactory
+      hibernate.cache.region_prefix: hibernate
+      hibernate.cache.use_structured_entries: true
+      hibernate.generate_statistics: true
+      redisson-config: classpath:conf/redisson.yaml
+      redis.expiryInSeconds.default: 120
+      redis.expiryInSeconds.hibernate.common: 0
+      redis.expiryInSeconds.hibernate.account: 1200

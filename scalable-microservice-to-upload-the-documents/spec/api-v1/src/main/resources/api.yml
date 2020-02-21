@@ -1,0 +1,41 @@
+openapi: "3.0.2"
+info:
+  version: 1.0.0.BUILD-SNAPSHOT
+  title: Catalog Service
+  description: APIs for file management
+paths:
+  /files:
+    post:
+      tags:
+        - catalog
+      operationId: upload file
+      requestBody:
+        content:
+          application/*:
+            schema:
+              $ref: 'file-upload-request.yml'
+      responses:
+        '200':
+          description: find image by id
+          content:
+            application/json:
+              schema:
+                $ref: 'file-upload-response.yml'
+  /files/{fileId}:
+    get:
+      tags:
+        - catalog
+      operationId: find all files
+      parameters:
+        - in: path
+          name: fileId
+          schema:
+            type: string
+          description: identifier for file
+      responses:
+        '200':
+          description: find find by id
+          content:
+            application/*:
+              schema:
+                $ref: 'file-response.yml'

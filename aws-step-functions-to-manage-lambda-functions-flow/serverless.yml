@@ -1,0 +1,119 @@
+service: order-processing-setpf
+
+provider:
+  name: aws
+  runtime: java8
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+    - "states:StartExecution"
+    Resource:
+    - "*"
+  - Effect: "Allow"
+    Resource: "*"
+    Action:
+    - "dynamodb:*"
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  stateResource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${self:custom.stage}"
+
+package:
+  artifact: build/distributions/aws-step-functions-to-manage-lambda-functions-flow.zip
+
+functions:
+  ReceiveOrder:
+    handler: bhuwanupadhyay.stepfunctions.ReceiveOrderFunction
+  ProcessOrder:
+    handler: bhuwanupadhyay.stepfunctions.ProcessOrderFunction
+  UpdateInventory:
+    handler: bhuwanupadhyay.stepfunctions.UpdateInventoryFunction
+  ChargeCustomer:
+    handler: bhuwanupadhyay.stepfunctions.ChargeCustomerFunction
+  ShipOrder:
+    handler: bhuwanupadhyay.stepfunctions.ShipOrderFunction
+  DeclineOrder:
+    handler: bhuwanupadhyay.stepfunctions.DeclineOrderFunction
+  NotifyProcurement:
+    handler: bhuwanupadhyay.stepfunctions.NotifyProcurementFunction
+  SendNotification:
+    handler: bhuwanupadhyay.stepfunctions.SendNotificationFunction
+  UpdateOrderStatus:
+    handler: bhuwanupadhyay.stepfunctions.UpdateOrderStatusFunction
+
+stepFunctions:
+  stateMachines:
+    OrderProcessingStateMachine:
+      name: OrderProcessingStateMachine
+      events:
+      - http:
+          path: orders
+          method: POST
+      definition:
+        Comment: "An Order Processing State Machine"
+        StartAt: ReceiveOrder
+        States:
+          ReceiveOrder:
+            Type: Task
+            Resource: "${self:custom.stateResource}-ReceiveOrder"
+            Next: CheckInventory
+          CheckInventory:
+            Type: Choice
+            Choices:
+            - Variable: "$.inventoryExits"
+              BooleanEquals: true
+              Next: ProcessOrder
+            - Variable: "$.inventoryExits"
+              BooleanEquals: false
+              Next: WhenNotExistsInInventory
+          ProcessOrder:
+            Type: Task
+            Resource: "${self:custom.stateResource}-ProcessOrder"
+            Next: UpdateInventory
+          UpdateInventory:
+            Type: Task
+            Resource: "${self:custom.stateResource}-UpdateInventory"
+            Next: ChargeCustomer
+          ChargeCustomer:
+            Type: Task
+            Resource: "${self:custom.stateResource}-ChargeCustomer"
+            Next: ShipOrder
+          ShipOrder:
+            Type: Task
+            Resource: "${self:custom.stateResource}-ShipOrder"
+            Next: SendNotification
+          WhenNotExistsInInventory:
+            Type: Parallel
+            Next: SendNotification
+            Branches:
+            - StartAt: DeclineOrder
+              States:
+                DeclineOrder:
+                  Type: Task
+                  Resource: "${self:custom.stateResource}-DeclineOrder"
+                  End: true
+            - StartAt: NotifyProcurement
+              States:
+                NotifyProcurement:
+                  Type: Task
+                  Resource: "${self:custom.stateResource}-NotifyProcurement"
+                  End: true
+          SendNotification:
+            Type: Task
+            Resource: "${self:custom.stateResource}-SendNotification"
+            Next: WaitUsingSeconds
+          WaitUsingSeconds:
+            Type: Wait
+            Seconds: 60
+            Next: UpdateOrderStatus
+          UpdateOrderStatus:
+            Type: Task
+            Resource: "${self:custom.stateResource}-UpdateOrderStatus"
+            End: true
+
+
+plugins:
+- serverless-step-functions
+- serverless-pseudo-parameters

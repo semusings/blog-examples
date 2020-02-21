@@ -1,0 +1,3 @@
+= LP-OPizza
+
+The Online Pizza Order System developed by using lightbend platform.

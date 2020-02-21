@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//DB_HOST:DB_PORT/DB_SERVICE
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: system
+    password: oracle
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      ddl-auto: create-drop

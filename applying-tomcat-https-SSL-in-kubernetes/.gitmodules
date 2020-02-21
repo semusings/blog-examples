@@ -1,0 +1,4 @@
+[submodule "springboot-order-crud-service"]
+	path = springboot-order-crud-service
+	url = git@github.com:BhuwanUpadhyay/springboot-order-crud-service.git
+	branch = war

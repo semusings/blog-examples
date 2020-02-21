@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: gridfs-content-repository
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: catalog-in

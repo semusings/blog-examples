@@ -1,0 +1,139 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'SAM template for Order service'
+
+Parameters:
+  Stage:
+    Type: String
+  AppName:
+    Type: String
+
+Resources:
+  Order:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub '${AppName}-${Stage}-order'
+      AttributeDefinitions:
+      - AttributeName: orderId
+        AttributeType: S
+      KeySchema:
+      - AttributeName: orderId
+        KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  GetOrders:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: bhuwanupadhyay.dynamodb.streams.GetOrdersLambda
+      Runtime: java8
+      CodeUri: build/distributions/aws-lambda-with-dynamodb-streams.zip
+      Description: List all orders
+      MemorySize: 128
+      Timeout: 20
+      Policies:
+      - Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - 'dynamodb:*'
+          Resource: !Sub 'arn:aws:dynamodb:${AWS::Region}:*:table/${AppName}-${Stage}-order'
+      Environment:
+        Variables:
+          TABLE: !Sub '${AppName}-${Stage}-order'
+      Events:
+        Event1:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: get
+            RestApiId:
+              Ref: OrderManagerApi
+
+  OrderManagerApi:
+    Type: 'AWS::Serverless::Api'
+    Properties:
+      StageName: !Ref Stage
+      DefinitionBody:
+        swagger: '2.0'
+        info:
+          title:
+            Ref: 'AWS::StackName'
+        paths:
+          /orders:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri:
+                  'Fn::Sub': >-
+                    arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetOrders.Arn}/invocations
+              responses: {}
+
+  GetOrdersLambdaPermission:
+    Type: 'AWS::Lambda::Permission'
+    DependsOn:
+    - GetOrders
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        Ref: GetOrders
+      Principal: apigateway.amazonaws.com
+
+  ReceiveOrder:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: bhuwanupadhyay.dynamodb.streams.ReceiveOrderLambda
+      Runtime: java8
+      CodeUri: build/distributions/aws-lambda-with-dynamodb-streams.zip
+      Description: Receive an order - to create new order
+      MemorySize: 128
+      Timeout: 20
+      Policies:
+      - Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - 'dynamodb:*'
+          Resource: !Sub 'arn:aws:dynamodb:${AWS::Region}:*:table/${AppName}-${Stage}-order'
+      Environment:
+        Variables:
+          TABLE: !Sub '${AppName}-${Stage}-order'
+
+  ProcessPayment:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: bhuwanupadhyay.dynamodb.streams.ProcessPaymentLambda
+      Runtime: java8
+      CodeUri: build/distributions/aws-lambda-with-dynamodb-streams.zip
+      Description: Process Payment - to collect payment for an order
+      MemorySize: 128
+      Timeout: 20
+      Policies:
+      - Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - 'dynamodb:*'
+          Resource: 'arn:aws:dynamodb:${AWS::Region}:*:table/${AppName}-${Stage}-order'
+      Environment:
+        Variables:
+          TABLE: '${AppName}-${Stage}-order'
+
+Outputs:
+  ReceiveOrderLambdaFunction:
+    Description: ReceiveOrder Lambda Function
+    Value: !Ref ReceiveOrder
+    Export:
+      Name: !Sub '${AWS::StackName}-ReceiveOrder'
+  GetOrdersLambdaFunction:
+    Description: GetOrders Lambda Function
+    Value: !Ref GetOrders
+    Export:
+      Name: !Sub '${AWS::StackName}-GetOrders'
+  ProcessPaymentLambdaFunction:
+    Description: ProcessPayment Lambda Function
+    Value: !Ref ProcessPayment
+    Export:
+      Name: !Sub '${AWS::StackName}-ProcessPayment'

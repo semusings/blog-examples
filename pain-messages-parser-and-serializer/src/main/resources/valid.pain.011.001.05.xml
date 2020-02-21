@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.011.001.05">
+    <MndtCxlReq>
+        <GrpHdr>
+            <MsgId>string</MsgId>
+            <CreDtTm>2008-09-29T05:49:45</CreDtTm>
+            <Authstn>
+                <Cd>FDET</Cd>
+            </Authstn>
+            <InitgPty>
+                <Nm>string</Nm>
+                <PstlAdr>
+                    <AdrTp>HOME</AdrTp>
+                    <Dept>string</Dept>
+                    <SubDept>string</SubDept>
+                    <StrtNm>string</StrtNm>
+                    <BldgNb>string</BldgNb>
+                    <PstCd>string</PstCd>
+                    <TwnNm>string</TwnNm>
+                    <CtrySubDvsn>string</CtrySubDvsn>
+                    <Ctry>NP</Ctry>
+                    <AdrLine>string</AdrLine>
+                </PstlAdr>
+                <Id>
+                    <OrgId>
+                        <AnyBIC>ZTCCMM71</AnyBIC>
+                        <Othr>
+                            <Id>string</Id>
+                            <SchmeNm>
+                                <Cd>stri</Cd>
+                            </SchmeNm>
+                            <Issr>string</Issr>
+                        </Othr>
+                    </OrgId>
+                </Id>
+                <CtryOfRes>NP</CtryOfRes>
+                <CtctDtls>
+                    <NmPrfx>MADM</NmPrfx>
+                    <Nm>string</Nm>
+                    <EmailAdr>string</EmailAdr>
+                    <Othr>string</Othr>
+                </CtctDtls>
+            </InitgPty>
+            <InstgAgt>
+                <FinInstnId>
+                    <BICFI>ZTCCMM71</BICFI>
+                    <ClrSysMmbId>
+                        <ClrSysId>
+                            <Cd>strin</Cd>
+                        </ClrSysId>
+                        <MmbId>string</MmbId>
+                    </ClrSysMmbId>
+                    <Nm>string</Nm>
+                    <PstlAdr>
+                        <AdrTp>MLTO</AdrTp>
+                        <Dept>string</Dept>
+                        <SubDept>string</SubDept>
+                        <StrtNm>string</StrtNm>
+                        <BldgNb>string</BldgNb>
+                        <PstCd>string</PstCd>
+                        <TwnNm>string</TwnNm>
+                        <CtrySubDvsn>string</CtrySubDvsn>
+                        <Ctry>NP</Ctry>
+                        <AdrLine>string</AdrLine>
+                    </PstlAdr>
+                    <Othr>
+                        <Id>string</Id>
+                        <Issr>string</Issr>
+                    </Othr>
+                </FinInstnId>
+                <BrnchId>
+                    <Id>string</Id>
+                    <Nm>string</Nm>
+                    <PstlAdr>
+                        <AdrTp>PBOX</AdrTp>
+                        <Dept>string</Dept>
+                        <SubDept>string</SubDept>
+                        <StrtNm>string</StrtNm>
+                        <BldgNb>string</BldgNb>
+                        <PstCd>string</PstCd>
+                        <TwnNm>string</TwnNm>
+                        <CtrySubDvsn>string</CtrySubDvsn>
+                        <Ctry>NP</Ctry>
+                        <AdrLine>string</AdrLine>
+                    </PstlAdr>
+                </BrnchId>
+            </InstgAgt>
+            <InstdAgt>
+                <FinInstnId>
+                    <BICFI>ZTCCMM71</BICFI>
+                    <ClrSysMmbId>
+                        <ClrSysId>
+                            <Cd>strin</Cd>
+                        </ClrSysId>
+                        <MmbId>string</MmbId>
+                    </ClrSysMmbId>
+                    <Nm>string</Nm>
+                    <PstlAdr>
+                        <AdrTp>PBOX</AdrTp>
+                        <Dept>string</Dept>
+                        <SubDept>string</SubDept>
+                        <StrtNm>string</StrtNm>
+                        <BldgNb>string</BldgNb>
+                        <PstCd>string</PstCd>
+                        <TwnNm>string</TwnNm>
+                        <CtrySubDvsn>string</CtrySubDvsn>
+                        <Ctry>NP</Ctry>
+                        <AdrLine>string</AdrLine>
+                    </PstlAdr>
+                    <Othr>
+                        <Id>string</Id>
+
+                        <SchmeNm>
+
+                            <Cd>stri</Cd>
+                        </SchmeNm>
+
+                        <Issr>string</Issr>
+                    </Othr>
+                </FinInstnId>
+
+                <BrnchId>
+
+                    <Id>string</Id>
+
+                    <Nm>string</Nm>
+
+                    <PstlAdr>
+
+                        <AdrTp>PBOX</AdrTp>
+
+                        <Dept>string</Dept>
+
+                        <SubDept>string</SubDept>
+
+                        <StrtNm>string</StrtNm>
+
+                        <BldgNb>string</BldgNb>
+
+                        <PstCd>string</PstCd>
+
+                        <TwnNm>string</TwnNm>
+
+                        <CtrySubDvsn>string</CtrySubDvsn>
+
+                        <Ctry>NP</Ctry>
+
+                        <AdrLine>string</AdrLine>
+                    </PstlAdr>
+                </BrnchId>
+            </InstdAgt>
+        </GrpHdr>
+        <UndrlygCxlDtls>
+
+            <OrgnlMsgInf>
+                <MsgId>string</MsgId>
+                <MsgNmId>string</MsgNmId>
+
+                <CreDtTm>2002-11-05T12:01:03+04:00</CreDtTm>
+            </OrgnlMsgInf>
+            <CxlRsn>
+
+                <Orgtr>
+
+                    <Nm>string</Nm>
+
+                    <PstlAdr>
+
+                        <AdrTp>HOME</AdrTp>
+
+                        <Dept>string</Dept>
+
+                        <SubDept>string</SubDept>
+
+                        <StrtNm>string</StrtNm>
+
+                        <BldgNb>string</BldgNb>
+
+                        <PstCd>string</PstCd>
+
+                        <TwnNm>string</TwnNm>
+
+                        <CtrySubDvsn>string</CtrySubDvsn>
+
+                        <Ctry>NP</Ctry>
+
+                        <AdrLine>string</AdrLine>
+                    </PstlAdr>
+
+                    <Id>
+
+                        <OrgId>
+
+                            <AnyBIC>ZTCCMM71</AnyBIC>
+
+                            <Othr>
+                                <Id>string</Id>
+
+                                <SchmeNm>
+
+                                    <Cd>stri</Cd>
+                                </SchmeNm>
+
+                                <Issr>string</Issr>
+                            </Othr>
+                        </OrgId>
+                    </Id>
+
+                    <CtryOfRes>NP</CtryOfRes>
+
+                    <CtctDtls>
+
+                        <NmPrfx>MIST</NmPrfx>
+
+                        <Nm>string</Nm>
+                        <EmailAdr>string</EmailAdr>
+
+                        <Othr>string</Othr>
+                    </CtctDtls>
+                </Orgtr>
+                <Rsn>
+
+                    <Cd>stri</Cd>
+                </Rsn>
+
+                <AddtlInf>string</AddtlInf>
+            </CxlRsn>
+            <OrgnlMndt>
+                <OrgnlMndt>
+                    <MndtId>string</MndtId>
+
+                    <MndtReqId>string</MndtReqId>
+
+                    <Authntcn>
+
+                        <MsgAuthntcnCd>string</MsgAuthntcnCd>
+
+                        <Dt>2010-03-18</Dt>
+
+                        <Chanl>
+
+                            <Cd>stri</Cd>
+                        </Chanl>
+                    </Authntcn>
+
+                    <Tp>
+
+                        <SvcLvl>
+
+                            <Cd>stri</Cd>
+                        </SvcLvl>
+
+                        <LclInstrm>
+
+                            <Cd>string</Cd>
+                        </LclInstrm>
+
+                        <CtgyPurp>
+
+                            <Cd>stri</Cd>
+                        </CtgyPurp>
+
+                        <Clssfctn>
+
+                            <Cd>VARI</Cd>
+                        </Clssfctn>
+                    </Tp>
+
+                    <Ocrncs>
+                        <SeqTp>RCUR</SeqTp>
+
+                        <Frqcy>
+                            <Tp>INDA</Tp>
+
+                        </Frqcy>
+
+                        <Drtn>
+                            <FrDt>2005-09-12+04:00</FrDt>
+
+                            <ToDt>2006-11-29</ToDt>
+                        </Drtn>
+
+                        <FrstColltnDt>2009-11-03+04:00</FrstColltnDt>
+
+                        <FnlColltnDt>2014-06-27+04:00</FnlColltnDt>
+                    </Ocrncs>
+                    <TrckgInd>true</TrckgInd>
+
+                    <FrstColltnAmt Ccy="NRP">1000</FrstColltnAmt>
+
+                    <ColltnAmt Ccy="NRP">1000.00000000000000</ColltnAmt>
+
+                    <MaxAmt Ccy="NRP">1000.00000000000000</MaxAmt>
+
+                    <Adjstmnt>
+                        <DtAdjstmntRuleInd>false</DtAdjstmntRuleInd>
+
+                        <Ctgy>
+
+                            <Cd>RATE</Cd>
+
+                        </Ctgy>
+
+                        <Amt Ccy="NRP">1000.00000000000000</Amt>
+
+                        <Rate>1000.0000000000</Rate>
+                    </Adjstmnt>
+
+                    <Rsn>
+
+                        <Cd>stri</Cd>
+
+                    </Rsn>
+
+                    <CdtrSchmeId>
+
+                        <Nm>string</Nm>
+
+                        <PstlAdr>
+
+                            <AdrTp>BIZZ</AdrTp>
+
+                            <Dept>string</Dept>
+
+                            <SubDept>string</SubDept>
+
+                            <StrtNm>string</StrtNm>
+
+                            <BldgNb>string</BldgNb>
+
+                            <PstCd>string</PstCd>
+
+                            <TwnNm>string</TwnNm>
+
+                            <CtrySubDvsn>string</CtrySubDvsn>
+
+                            <Ctry>NP</Ctry>
+
+                            <AdrLine>string</AdrLine>
+                        </PstlAdr>
+
+                        <Id>
+
+                            <OrgId>
+
+                                <AnyBIC>ZTCCMM71</AnyBIC>
+
+                                <Othr>
+                                    <Id>string</Id>
+
+                                    <SchmeNm>
+
+                                        <Cd>stri</Cd>
+
+                                    </SchmeNm>
+
+                                    <Issr>string</Issr>
+                                </Othr>
+                            </OrgId>
+                        </Id>
+
+                        <CtryOfRes>NP</CtryOfRes>
+
+                        <CtctDtls>
+
+                            <NmPrfx>MISS</NmPrfx>
+
+                            <Nm>string</Nm>
+                            <EmailAdr>string</EmailAdr>
+
+                            <Othr>string</Othr>
+                        </CtctDtls>
+                    </CdtrSchmeId>
+                    <Cdtr>
+
+                        <Nm>string</Nm>
+
+                        <PstlAdr>
+
+                            <AdrTp>DLVY</AdrTp>
+
+                            <Dept>string</Dept>
+
+                            <SubDept>string</SubDept>
+
+                            <StrtNm>string</StrtNm>
+
+                            <BldgNb>string</BldgNb>
+
+                            <PstCd>string</PstCd>
+
+                            <TwnNm>string</TwnNm>
+
+                            <CtrySubDvsn>string</CtrySubDvsn>
+
+                            <Ctry>NP</Ctry>
+
+                            <AdrLine>string</AdrLine>
+                        </PstlAdr>
+
+                        <Id>
+
+                            <OrgId>
+
+                                <AnyBIC>ZTCCMM71</AnyBIC>
+
+                                <Othr>
+                                    <Id>string</Id>
+
+                                    <SchmeNm>
+
+                                        <Cd>stri</Cd>
+
+                                    </SchmeNm>
+
+                                    <Issr>string</Issr>
+                                </Othr>
+                            </OrgId>
+                        </Id>
+
+                        <CtryOfRes>NP</CtryOfRes>
+
+                        <CtctDtls>
+
+                            <NmPrfx>DOCT</NmPrfx>
+
+                            <Nm>string</Nm>
+
+                            <EmailAdr>string</EmailAdr>
+
+                            <Othr>string</Othr>
+                        </CtctDtls>
+                    </Cdtr>
+
+                    <CdtrAcct>
+                        <Id>
+
+                            <IBAN>LB384689BHRRC36MJSTV6P4B04VR</IBAN>
+                        </Id>
+
+                        <Tp>
+
+                            <Cd>stri</Cd>
+
+                        </Tp>
+
+                        <Ccy>NRP</Ccy>
+
+                        <Nm>string</Nm>
+                    </CdtrAcct>
+
+                    <CdtrAgt>
+                        <FinInstnId>
+
+                            <BICFI>ZTCCMM71</BICFI>
+
+                            <ClrSysMmbId>
+
+                                <ClrSysId>
+
+                                    <Cd>strin</Cd>
+
+                                </ClrSysId>
+                                <MmbId>string</MmbId>
+                            </ClrSysMmbId>
+
+                            <Nm>string</Nm>
+
+                            <PstlAdr>
+
+                                <AdrTp>ADDR</AdrTp>
+
+                                <Dept>string</Dept>
+
+                                <SubDept>string</SubDept>
+
+                                <StrtNm>string</StrtNm>
+
+                                <BldgNb>string</BldgNb>
+
+                                <PstCd>string</PstCd>
+
+                                <TwnNm>string</TwnNm>
+
+                                <CtrySubDvsn>string</CtrySubDvsn>
+
+                                <Ctry>NP</Ctry>
+
+                                <AdrLine>string</AdrLine>
+                            </PstlAdr>
+
+                            <Othr>
+                                <Id>string</Id>
+
+                                <SchmeNm>
+
+                                    <Cd>stri</Cd>
+
+                                </SchmeNm>
+
+                                <Issr>string</Issr>
+                            </Othr>
+                        </FinInstnId>
+
+                        <BrnchId>
+
+                            <Id>string</Id>
+
+                            <Nm>string</Nm>
+
+                            <PstlAdr>
+
+                                <AdrTp>PBOX</AdrTp>
+
+                                <Dept>string</Dept>
+
+                                <SubDept>string</SubDept>
+
+                                <StrtNm>string</StrtNm>
+
+                                <BldgNb>string</BldgNb>
+
+                                <PstCd>string</PstCd>
+
+                                <TwnNm>string</TwnNm>
+
+                                <CtrySubDvsn>string</CtrySubDvsn>
+
+                                <Ctry>NP</Ctry>
+
+                                <AdrLine>string</AdrLine>
+                            </PstlAdr>
+                        </BrnchId>
+                    </CdtrAgt>
+
+                    <UltmtCdtr>
+
+                        <Nm>string</Nm>
+
+                        <PstlAdr>
+
+                            <AdrTp>HOME</AdrTp>
+
+                            <Dept>string</Dept>
+
+                            <SubDept>string</SubDept>
+
+                            <StrtNm>string</StrtNm>
+
+                            <BldgNb>string</BldgNb>
+
+                            <PstCd>string</PstCd>
+
+                            <TwnNm>string</TwnNm>
+
+                            <CtrySubDvsn>string</CtrySubDvsn>
+
+                            <Ctry>NP</Ctry>
+
+                            <AdrLine>string</AdrLine>
+                        </PstlAdr>
+
+                        <Id>
+
+                            <OrgId>
+
+                                <AnyBIC>ZTCCMM71</AnyBIC>
+
+                                <Othr>
+                                    <Id>string</Id>
+
+                                    <SchmeNm>
+
+                                        <Cd>stri</Cd>
+
+                                    </SchmeNm>
+
+                                    <Issr>string</Issr>
+                                </Othr>
+                            </OrgId>
+                        </Id>
+
+                        <CtryOfRes>NP</CtryOfRes>
+
+                        <CtctDtls>
+
+                            <NmPrfx>MISS</NmPrfx>
+
+                            <Nm>string</Nm>
+
+                            <EmailAdr>string</EmailAdr>
+
+                            <Othr>string</Othr>
+                        </CtctDtls>
+                    </UltmtCdtr>
+                    <Dbtr>
+
+                        <Nm>string</Nm>
+
+                        <PstlAdr>
+
+                            <AdrTp>PBOX</AdrTp>
+
+                            <Dept>string</Dept>
+
+                            <SubDept>string</SubDept>
+
+                            <StrtNm>string</StrtNm>
+
+                            <BldgNb>string</BldgNb>
+
+                            <PstCd>string</PstCd>
+
+                            <TwnNm>string</TwnNm>
+
+                            <CtrySubDvsn>string</CtrySubDvsn>
+
+                            <Ctry>NP</Ctry>
+
+                            <AdrLine>string</AdrLine>
+                        </PstlAdr>
+
+                        <Id>
+
+                            <OrgId>
+
+                                <AnyBIC>ZTCCMM71</AnyBIC>
+
+                                <Othr>
+                                    <Id>string</Id>
+
+                                    <SchmeNm>
+
+                                        <Cd>stri</Cd>
+
+                                    </SchmeNm>
+
+                                    <Issr>string</Issr>
+                                </Othr>
+                            </OrgId>
+                        </Id>
+
+                        <CtryOfRes>NP</CtryOfRes>
+
+                        <CtctDtls>
+
+                            <NmPrfx>MISS</NmPrfx>
+
+                            <Nm>string</Nm>
+                            <EmailAdr>string</EmailAdr>
+
+                            <Othr>string</Othr>
+                        </CtctDtls>
+                    </Dbtr>
+
+                    <DbtrAcct>
+                        <Id>
+
+                            <IBAN>FO2640803579536381</IBAN>
+
+                        </Id>
+
+                        <Tp>
+
+                            <Cd>stri</Cd>
+
+                        </Tp>
+
+                        <Ccy>NRP</Ccy>
+
+                        <Nm>string</Nm>
+                    </DbtrAcct>
+                    <DbtrAgt>
+                        <FinInstnId>
+
+                            <BICFI>EMHJAW8Y</BICFI>
+
+                            <ClrSysMmbId>
+
+                                <ClrSysId>
+
+                                    <Cd>strin</Cd>
+
+                                </ClrSysId>
+                                <MmbId>string</MmbId>
+                            </ClrSysMmbId>
+
+                            <Nm>string</Nm>
+
+                            <PstlAdr>
+
+                                <AdrTp>HOME</AdrTp>
+
+                                <Dept>string</Dept>
+
+                                <SubDept>string</SubDept>
+
+                                <StrtNm>string</StrtNm>
+
+                                <BldgNb>string</BldgNb>
+
+                                <PstCd>string</PstCd>
+
+                                <TwnNm>string</TwnNm>
+
+                                <CtrySubDvsn>string</CtrySubDvsn>
+
+                                <Ctry>NP</Ctry>
+
+                                <AdrLine>string</AdrLine>
+                            </PstlAdr>
+
+                            <Othr>
+                                <Id>string</Id>
+
+                                <SchmeNm>
+
+                                    <Cd>stri</Cd>
+
+                                </SchmeNm>
+
+                                <Issr>string</Issr>
+                            </Othr>
+                        </FinInstnId>
+
+                        <BrnchId>
+
+                            <Id>string</Id>
+
+                            <Nm>string</Nm>
+
+                            <PstlAdr>
+
+                                <AdrTp>MLTO</AdrTp>
+
+                                <Dept>string</Dept>
+
+                                <SubDept>string</SubDept>
+
+                                <StrtNm>string</StrtNm>
+
+                                <BldgNb>string</BldgNb>
+
+                                <PstCd>string</PstCd>
+
+                                <TwnNm>string</TwnNm>
+
+                                <CtrySubDvsn>string</CtrySubDvsn>
+
+                                <Ctry>NP</Ctry>
+
+                                <AdrLine>string</AdrLine>
+                            </PstlAdr>
+                        </BrnchId>
+                    </DbtrAgt>
+
+                    <UltmtDbtr>
+
+                        <Nm>string</Nm>
+
+                        <PstlAdr>
+
+                            <AdrTp>DLVY</AdrTp>
+
+                            <Dept>string</Dept>
+
+                            <SubDept>string</SubDept>
+
+                            <StrtNm>string</StrtNm>
+
+                            <BldgNb>string</BldgNb>
+
+                            <PstCd>string</PstCd>
+
+                            <TwnNm>string</TwnNm>
+
+                            <CtrySubDvsn>string</CtrySubDvsn>
+
+                            <Ctry>NP</Ctry>
+
+                            <AdrLine>string</AdrLine>
+                        </PstlAdr>
+
+                        <Id>
+
+                            <OrgId>
+
+                                <AnyBIC>ZTCCMM71</AnyBIC>
+
+                                <Othr>
+                                    <Id>string</Id>
+
+                                    <SchmeNm>
+
+                                        <Cd>stri</Cd>
+
+                                    </SchmeNm>
+
+                                    <Issr>string</Issr>
+                                </Othr>
+                            </OrgId>
+                        </Id>
+
+                        <CtryOfRes>NP</CtryOfRes>
+
+                        <CtctDtls>
+
+                            <NmPrfx>MADM</NmPrfx>
+
+                            <Nm>string</Nm>
+
+                            <EmailAdr>string</EmailAdr>
+
+                            <Othr>string</Othr>
+                        </CtctDtls>
+                    </UltmtDbtr>
+
+                    <MndtRef>string</MndtRef>
+
+                    <RfrdDoc>
+
+                        <Tp>
+                            <CdOrPrtry>
+
+                                <Cd>DNFA</Cd>
+                            </CdOrPrtry>
+
+                            <Issr>string</Issr>
+                        </Tp>
+
+                        <Nb>string</Nb>
+
+                        <CdtrRef>string</CdtrRef>
+
+                        <RltdDt>2007-09-09</RltdDt>
+                    </RfrdDoc>
+                </OrgnlMndt>
+            </OrgnlMndt>
+
+            <SplmtryData>
+
+                <PlcAndNm>string</PlcAndNm>
+                <Envlp>
+                    <!--You may enter ANY elements at this point-->
+                    <AnyElement/>
+                </Envlp>
+            </SplmtryData>
+        </UndrlygCxlDtls>
+
+        <SplmtryData>
+
+            <PlcAndNm>string</PlcAndNm>
+            <Envlp>
+                <!--You may enter ANY elements at this point-->
+                <AnyElement/>
+            </Envlp>
+        </SplmtryData>
+    </MndtCxlReq>
+</Document>

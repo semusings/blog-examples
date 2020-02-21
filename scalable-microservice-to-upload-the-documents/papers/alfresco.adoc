@@ -1,0 +1,3 @@
+= Alfresco
+=== REFERENCE
+- https://github.com/Alfresco/acs-community-deployment/blob/master/docker-compose/docker-compose.yml

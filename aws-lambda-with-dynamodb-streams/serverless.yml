@@ -1,0 +1,108 @@
+service: order-manager-api
+
+custom:
+  stage: ${opt:stage}
+  region: ${opt:region, self:provider.region}
+  stack_name: ${self:service}-${self:custom.stage}
+  dynamodb_table: ${self:custom.stack_name}-order
+  dynamodb_arn: arn:aws:dynamodb:${self:custom.region}:*:table/${self:custom.dynamodb_table}
+  stateResource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${self:custom.stage}"
+
+provider:
+  name: aws
+  runtime: java8
+  region: us-east-1
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - 'dynamodb:*'
+    Resource: ${self:custom.dynamodb_arn}
+
+  environment:
+    TABLE: ${self:custom.dynamodb_table}
+    AWS_SAM_LOCAL: false
+
+package:
+  artifact: build/distributions/aws-lambda-with-dynamodb-streams.zip
+
+functions:
+
+  GetOrders:
+    name: ${self:custom.stack_name}-GetOrders
+    handler: bhuwanupadhyay.dynamodb.streams.GetOrdersLambda
+    description: List all orders
+    events:
+    - http:
+        path: orders
+        method: get
+
+  ReceiveOrder:
+    name: ${self:custom.stack_name}-ReceiveOrder
+    handler: bhuwanupadhyay.dynamodb.streams.ReceiveOrderLambda
+    description: Receive an order - to create new order
+    events:
+    - http:
+        path: orders
+        method: post
+
+  ProcessPayment:
+    name: ${self:custom.stack_name}-ProcessPayment
+    handler: bhuwanupadhyay.dynamodb.streams.ProcessPaymentLambda
+    description: Process Payment - to collect payment for an order
+    events:
+    - stream:
+        type: dynamodb
+        arn:
+          Fn::GetAtt:
+          - Order
+          - StreamArn
+        batchSize: 1
+
+  PrepareOrder:
+    name: ${self:custom.stack_name}-PrepareOrder
+    handler: bhuwanupadhyay.dynamodb.streams.PrepareOrderLambda
+    description: Process Payment - to prepare an order
+    events:
+    - stream:
+        type: dynamodb
+        arn:
+          Fn::GetAtt:
+          - Order
+          - StreamArn
+        batchSize: 1
+
+  ShipOrder:
+    name: ${self:custom.stack_name}-ShipOrder
+    handler: bhuwanupadhyay.dynamodb.streams.ShipOrderLambda
+    description: Ship order - to prepare an order
+    events:
+    - stream:
+        type: dynamodb
+        arn:
+          Fn::GetAtt:
+          - Order
+          - StreamArn
+        batchSize: 1
+
+resources:
+  Resources:
+    Order:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.dynamodb_table}
+        AttributeDefinitions:
+        - AttributeName: orderId
+          AttributeType: S
+        KeySchema:
+        - AttributeName: orderId
+          KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
+
+plugins:
+- serverless-sam
+- serverless-offline
+- serverless-pseudo-parameters

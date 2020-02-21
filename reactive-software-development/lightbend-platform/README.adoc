@@ -1,0 +1,8 @@
+= Lightbend Platform
+
+image::docs/lightbend-platform.png[]
+
+include::docs/BUSINESS-COMPONENTS.adoc[]
+
+include::docs/SETUP.adoc[Setup]
+

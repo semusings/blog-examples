@@ -1,0 +1,5 @@
+{
+  "env": {
+    "ordersEndpoint": "https://1qxb8f7vte.execute-api.us-east-1.amazonaws.com/dev/orders"
+  }
+}

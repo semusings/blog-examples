@@ -1,0 +1,8 @@
+type: object
+title: file upload request
+description: file upload request
+properties:
+  id:
+    type: string
+  name:
+    type: string

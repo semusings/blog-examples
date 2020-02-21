@@ -1,0 +1,10 @@
+version: '3'
+services:
+  gotify:
+    image: gotify/server
+    ports:
+      - 180:80
+    restart: always
+    volumes:
+      - ./config.yaml:/etc/gotify/config.yml
+      - ./data:/app/data

@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+
+<h1 *ngIf="socket.wsActive" style="color: green;">Connected with gotify!</h1>
+<h1 *ngIf="!socket.wsActive" style="color: red;">Disconnected!</h1>
+<hr>
+
+<ul>
+  <li *ngFor="let item of messages; index as i">
+    <b>{{i + 1}}. {{item}}</b>
+    <hr/>
+  </li>
+</ul>
+
+<hr>
+<button (click)="connect()">Connect</button>
+<br>
+<button (click)="disconnect()">Disconnect</button>

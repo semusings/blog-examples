@@ -1,0 +1,29 @@
+{
+  "name": "aws-step-functions-to-manage-lambda-functions-flow",
+  "version": "1.0.0",
+  "description": "AWS Step Functions to manage Lambda functions flow",
+  "main": "index.js",
+  "scripts": {
+    "build": "./gradlew clean build",
+    "deploy": "sls deploy -v | tee deploy.aws.log",
+    "remove": "sls remove",
+    "redeploy": "npm run build && npm run deploy",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhuwanUpadhyay/aws-step-functions-to-manage-lambda-functions-flow.git"
+  },
+  "author": "Bhuwan Pd. Upadhyay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BhuwanUpadhyay/aws-step-functions-to-manage-lambda-functions-flow/issues"
+  },
+  "homepage": "https://github.com/BhuwanUpadhyay/aws-step-functions-to-manage-lambda-functions-flow#readme",
+  "devDependencies": {
+    "cypress": "^3.1.0",
+    "serverless-pseudo-parameters": "^2.2.0",
+    "serverless-step-functions": "^1.6.1"
+  }
+}

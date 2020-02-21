@@ -1,0 +1,161 @@
+= Skip all cucumber-jvm scenarios when first scenario is failed
+
+== Introduction
+Recently, I am joined on the ongoing project which has Maven and Cucumber based automation test suite.
+The complicated things with that project are:
+
+* The infrastructure is very unreliable which one used to run the acceptance tests.
+* Everywhere waiting time placed in acceptance tests source code due to that usually tests need a long time to execute all scenarios.
+* The result of these reasons is pipeline is almost red all the time.
+
+So I was looking for a way to stop testing when the first scenario is failed.
+
+== JUnit RunListener
+
+One way to solve this problem is by using JUnit RunListener which calls `System.exit(-1)`
+when the first test failure occurs.
+The code for the RunListener looks like this:
+[source,java]
+----
+package io.github.bhuwanupadhyay.junit;
+
+import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunListener;
+
+import java.util.logging.Logger;
+
+public class FailFastListener extends RunListener {
+
+    private static final Logger LOG = Logger.getLogger(FailFastListener.class.getName());
+
+    @Override
+    public void testFailure(Failure failure) throws Exception {
+        LOG.info("Failed: " + failure.getTrace());
+        super.testFailure(failure);
+        System.exit(-1);
+    }
+
+}
+----
+And the corresponding configuration in the pom:
+[source,xml]
+----
+<plugin>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.1</version>
+    <configuration>
+        <properties>
+            <property>
+                <name>listener</name>
+                <value>io.github.bhuwanupadhyay.junit.FailFastListener</value>
+            </property>
+        </properties>
+    </configuration>
+</plugin>
+----
+
+The advantage of this approach is, that you can actually configure the fail fast behavior in the external pom. So no code changes needed and flexibility added.
+
+And the disadvantage about this solution was the call to System.exit() which immediately terminates the test run, without the test runner having a chance to output some kind of summary. That is especially bad in environments where test results are not logged verbosly.
+
+== Run Notifier
+
+The solution is the method `pleaseStop()` in the class `RunNotifier`.
+This method signals JUnit to stop execution of any following tests.
+It might be that some tests are still executed when running tests in parallel though.
+In order to access this method I had to extend the solution above in the following way:
+
+* Pass the `RunNotifier` to the RunListener and call `pleaseStop()` on the first failure:
+[source,java]
+----
+package io.github.bhuwanupadhyay.junit;
+
+import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunListener;
+import org.junit.runner.notification.RunNotifier;
+
+import java.util.logging.Logger;
+
+public class SafeFailFastListener extends RunListener {
+
+    private static final Logger LOG = Logger.getLogger(FailFastListener.class.getName());
+
+    private final RunNotifier notifier;
+
+    public SafeFailFastListener(RunNotifier notifier) {
+        this.notifier = notifier;
+    }
+
+    @Override
+    public void testFailure(Failure failure) throws Exception {
+        LOG.info("FAILED: " + failure.getTrace());
+        super.testFailure(failure);
+        notifier.pleaseStop();
+    }
+
+}
+----
+
+
+* Implement an own TestRunner that inherits from the one regularly used in cucumber feature test
+ (e.g. `Cucumber`) that has access to the `RunNotifier`:
+[source,java]
+----
+package io.github.bhuwanupadhyay.junit;
+
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.model.InitializationError;
+
+public class FailFastCucumberRunner extends Cucumber {
+
+    /**
+     * Constructor called by JUnit.
+     *
+     * @param clazz the class with the @RunWith annotation.
+     * @throws InitializationError if there is another problem
+     */
+    public FailFastCucumberRunner(Class clazz) throws InitializationError {
+        super(clazz);
+    }
+
+    @Override
+    public void run(RunNotifier notifier) {
+        notifier.addListener(new SafeFailFastListener(notifier));
+        super.run(notifier);
+    }
+
+}
+----
+
+* You need to change feature test runner using `FailFastCucumberRunner` like below:
+[source,java]
+----
+@RunWith(FailFastCucumberRunner.class)
+@CucumberOptions(
+        plugin = {"pretty"},
+        features = {"src/test/resources/order-service.feature"},
+        glue = {"io.github.bhuwanupadhyay.ordering"})
+public class OrderServiceFeatureTest {
+}
+----
+
+* The corresponding configuration in the pom:
+[source,xml]
+----
+<plugin>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.1</version>
+</plugin>
+----
+
+The full source for these two approach can be found https://github.com/BhuwanUpadhyay/skip-all-cucumber-jvm-scenarios-when-first-scenario-is-failed[here]
+
+== Conclusion
+Using RunListeners can be used to abort unit testing on a failure using System.exit.
+This approach has the advantage that the code does not need to be changed.
+The disadvantage being that System.exit prevents any further processing of the test environment as well.
+
+Using an own TestRunner in addition to a RunListener as described above is more elegant but
+includes changes to the source code of the test classes. And you have to be polite 😉
+.

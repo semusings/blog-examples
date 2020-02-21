@@ -1,0 +1,26 @@
+= Scalable microservice to upload the documents
+
+== Problem Context
+
+We want highly performing, scalable, and small microservice which
+can store files in the reference of other services.
+
+
+[source,bash]
+----
+spring init\
+ -n=file-upload-service\
+ -d=webflux,actuator\
+ --build=gradle\
+ --groupId=io.github.bhuwanupadhyay\
+ --package-name=io.github.bhuwanupadhyay.file.upload\
+ --description="File Upload Service"\
+ --version=1.0.0.BUILD-SNAPSHOT\
+ --language=kotlin file-upload-service
+----
+
+
+
+
+
+
