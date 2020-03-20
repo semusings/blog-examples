@@ -31,8 +31,8 @@ class SolutionTest {
 
     @ParameterizedTest
     @MethodSource("data")
-    void testSolution(String input, boolean expected) {
-        boolean actual = this.solution.hasBalanceBrackets(input);
+    void testSolution(String input, String expected) {
+        String actual = this.solution.longestPalindrome(input);
 
         assertEquals(expected, actual);
 
