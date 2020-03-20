@@ -1,0 +1,12 @@
+.idea
+*.iml
+public
+package-lock.json
+node_modules
+resources
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+target
