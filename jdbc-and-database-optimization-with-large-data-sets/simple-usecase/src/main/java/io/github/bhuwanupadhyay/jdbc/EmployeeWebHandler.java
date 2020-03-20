@@ -4,12 +4,12 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-public interface CmisHandler {
+public interface EmployeeWebHandler {
 
-    Mono<ServerResponse> listDocument(ServerRequest request);
+    Mono<ServerResponse> listEmployee(ServerRequest request);
 
-    Mono<ServerResponse> getDocument(ServerRequest request);
+    Mono<ServerResponse> getEmployee(ServerRequest request);
 
-    Mono<ServerResponse> createDocument(ServerRequest request);
+    Mono<ServerResponse> createEmployee(ServerRequest request);
 
 }
