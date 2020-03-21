@@ -1,4 +1,4 @@
-public class MergeSort {
+class MergeSort {
 
     private void merge(int[] A, int start, int mid, int end) {
         //stores the starting position of both parts in temporary variables.

@@ -15,6 +15,7 @@ class MergeSortTest {
         return Arrays.asList(
                 new Object[][]{
                         {new int[]{5, 7, 8, 9, 2}, new int[]{2, 5, 7, 8, 9}},
+                        {new int[]{9, 7, 8, 3, 2, 1}, new int[]{1, 2, 3, 7, 8, 9}},
                 }
         );
     }
