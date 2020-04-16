@@ -1,2 +1,0 @@
-# parameterized-junit
-Parameterized JUnit

@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  postgresql:
+    image: postgres:12.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'alfresco'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+  alfresco:
+    image: alfresco/alfresco-content-repository-community
+    environment:
+      JAVA_OPTS: "
+        -Ddb.driver=org.postgresql.Driver
+        -Ddb.username=user
+        -Ddb.password=password
+        -Ddb.url=jdbc:postgresql://postgresql:5432/alfresco
+        -Dlocal.transform.service.enabled=false
+        -Dalfresco.port=8080
+        -Dalfresco.host=localhost
+        "
+    links:
+      - postgresql
+    depends_on:
+      - postgresql
+    ports:
+    - 8080:8080
